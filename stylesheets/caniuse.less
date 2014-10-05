@@ -1,0 +1,43 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/stylesheets/ui-variables.less
+// for a full listing of what's available.
+
+/* @import "ui-variables"; */
+
+.caniuse-view {
+
+    ol.list-group {
+        max-height: 156px;
+    }
+
+    table {
+        margin-top: 10px;
+        width: 100%;
+        th {
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            line-height: 1;
+        }
+        td {
+            color: white;
+            text-align: center;
+            padding: 2px 0;
+            line-height: 1;
+
+            &.is-supported {
+                /* background-color: #39b54a; */
+                background-color: rgba(0, 100, 0, 0.8);
+            }
+            &.is-almost-supported {
+                /* background-color:#889a00; */
+                background-color: rgba(151, 215, 0, 0.8);
+            }
+            &.is-unsupported {
+                /* background-color: #c44230; */
+                background-color: rgba(139, 0, 0, 0.8);
+            }
+        }
+    }
+}
