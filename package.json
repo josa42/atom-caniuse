@@ -2,7 +2,7 @@
   "name": "caniuse",
   "main": "./lib/caniuse",
   "version": "0.1.0",
-  "description": "A short description of your package",
+  "description": "Quick access to the caniuse.com support tables.",
   "repository": "https://github.com/josa42/atom-caniuse",
   "license": "MIT",
   "engines": {
