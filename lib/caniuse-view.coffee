@@ -1,7 +1,7 @@
 {SelectListView, TextEditorView, $} = require 'atom'
 {exec} = require('child_process')
-
 data = require '../data/data.json'
+open = require 'open'
 
 module.exports =
 class AtomCaniuseView extends SelectListView
@@ -27,10 +27,7 @@ class AtomCaniuseView extends SelectListView
     "<li>#{item.title}</li>"
 
   confirmed: (item) ->
-    url = "http://caniuse.com/#feat=#{item.key}"
-    switch process.platform
-      when 'darwin' then exec("open '#{url}'")
-      when 'linux' then exec("xdg-open '#{url}'")
+    open("http://caniuse.com/#feat=#{item.key}");
 
     @cancel()
 
