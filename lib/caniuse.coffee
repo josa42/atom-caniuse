@@ -29,7 +29,7 @@ module.exports =
       type:'boolean'
       default:  false
     showAndroid:
-      title: 'Android Browser'
+      title: 'Show Android Browser'
       type:'boolean'
       default:  true
     showOpMob:
