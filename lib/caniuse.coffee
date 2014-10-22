@@ -24,8 +24,5 @@ module.exports =
       @caniuseView = new CaniuseView(state.atomCaniuseViewState)
       @caniuseView.show()
 
-  deactivate: ->
-    @caniuseView.destroy()
-
   serialize: ->
     caniuseViewState: @caniuseView.serialize()
