@@ -3,21 +3,59 @@ CaniuseView = require './caniuse-view'
 module.exports =
   caniuseView: null
 
-  configDefaults:
-    showIe: true
-    showFirefox: true
-    showChrome: true
-    showSafari: true
-    showOpera: false
-    showIosSaf: true
-    showOpMini: false
-    showAndroid: true
-    showOpMob: false
-    showBb: false
-    showAndChr: true
-    showAndFf: false
-    showIeMob: false
-    showAndUc : false
+  config:
+    showIe:
+      title: 'Show IE'
+      type:'boolean'
+      default:  true
+    showFirefox:
+      type:'boolean'
+      default:  true
+    showChrome:
+      type:'boolean'
+      default:  true
+    showSafari:
+      type:'boolean'
+      default:  true
+    showOpera:
+      type:'boolean'
+      default:  false
+    showIosSaf:
+      title: 'Show iOS Safari'
+      type:'boolean'
+      default:  true
+    showOpMini:
+      title: 'Show Opera Mini'
+      type:'boolean'
+      default:  false
+    showAndroid:
+      title: 'Android Browser'
+      type:'boolean'
+      default:  true
+    showOpMob:
+      title: 'Show Opera Mobile'
+      type:'boolean'
+      default:  false
+    showBb:
+      title: 'Show Blackberry Browser'
+      type:'boolean'
+      default:  false
+    showAndChr:
+      title: 'Show Chrome for Android'
+      type:'boolean'
+      default:  true
+    showAndFf:
+      title: 'Show Firefox for Android'
+      type:'boolean'
+      default:  false
+    showIeMob:
+      title: 'Show IE Mobile'
+      type:'boolean'
+      default:  false
+    showAndUc:
+      title: 'Show UC Browser for Android'
+      type:'boolean'
+      default:  false
 
   activate: (state) ->
     atom.workspaceView.command 'caniuse:show', =>
