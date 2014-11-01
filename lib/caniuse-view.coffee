@@ -32,6 +32,7 @@ class AtomCaniuseView extends SelectListView
     @cancel()
 
   selectItemView: (view) ->
+    super(view)
 
     agentKeys = Object.keys(data.agents)
       .filter (key) ->
@@ -40,8 +41,6 @@ class AtomCaniuseView extends SelectListView
         )
         return atom.config.get("caniuse.#{confKey}")
 
-
-    super(view)
     item = @getSelectedItem()
 
     @head.html('')

@@ -1,6 +1,6 @@
-# atom-caniuse package
+# caniuse package
 
-Quick access to the caniuse.com support tables.
+Quick access to the [Can I Use](caniuse.com) support tables.
 
 ![](https://raw.githubusercontent.com/josa42/atom-caniuse/master/screenshot.gif)
 

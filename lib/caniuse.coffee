@@ -57,6 +57,6 @@ module.exports =
       default: false
 
   activate: (state) ->
-    atom.workspaceView.command 'caniuse:show', =>
+    atom.workspaceView.command 'can-i-use:show', =>
       @caniuseView = new CaniuseView()
       @caniuseView.show()

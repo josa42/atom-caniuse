@@ -1,14 +1,8 @@
 # See https://atom.io/docs/latest/creating-a-package#menus for more details
-'context-menu':
-  '.overlayer':
-      'Enable atom-caniuse': 'atom-caniuse:toggle'
-
-'menu': [
-  {
-    'label': 'Packages'
-    'submenu': [
-      'label': 'Caniuse'
-      'command': 'caniuse:show'
-    ]
-  }
-]
+'menu': [{
+  'label': 'Packages'
+  'submenu': [
+    'label': 'Can I Use'
+    'command': 'can-i-use:show'
+  ]
+}]
