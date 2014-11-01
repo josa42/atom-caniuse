@@ -1,4 +1,7 @@
-## 0.4.0
+## 0.4.1
+* Add markdown parser for footnotes
+
+## 0.4.0 - Footnotes
 * Updated colors to match themes
 * Add footnotes
 

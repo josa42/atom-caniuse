@@ -1,5 +1,6 @@
 {SelectListView, TextEditorView, $} = require 'atom'
 {exec} = require('child_process')
+{markdown} = require('markdown')
 open = require 'open'
 
 
@@ -138,7 +139,7 @@ class AtomCaniuseView extends SelectListView
 
     notes = Object.keys(item.notes_by_num)
       .filter (i) => needNotes.indexOf(i) isnt -1
-      .map (i) => $('<div>').text(repeat('*', i) + ' ' + item.notes_by_num[i])
+      .map (i) => markdown.toHTML(repeat('\\*', i) + ' ' + item.notes_by_num[i])
 
     @notes
       .html('')
