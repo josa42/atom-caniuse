@@ -1,5 +1,6 @@
 ## 0.4.0
 * Updated colors to match themes
+* Add footnotes
 
 
 ## 0.3.0 - Data updating

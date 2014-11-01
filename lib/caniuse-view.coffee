@@ -2,6 +2,19 @@
 {exec} = require('child_process')
 open = require 'open'
 
+
+# infos =
+#   y: 'Yes, supported by default'
+#   a: 'Almost supported (aka Partial support)'
+#   u: 'Support unknown'
+#   x: 'Requires prefix to work'
+#   p: 'No support, but has Polyfill'
+#   n: 'No support, or disabled by default'
+#   d: 'Disabled by default (need to enable flag or something)'
+
+
+repeat = (str, num) -> new Array(Number(num) + 1).join(str)
+
 module.exports =
 class AtomCaniuseView extends SelectListView
   @content: ->
@@ -15,6 +28,7 @@ class AtomCaniuseView extends SelectListView
       @table =>
         @thead outlet: 'head'
         @tbody outlet: 'table'
+      @div class: 'notes', outlet: 'notes'
 
   data: null
 
@@ -60,12 +74,19 @@ class AtomCaniuseView extends SelectListView
 
     @head.html('')
     tr = $('<tr>')
+
+    countCls = 'agents-count-' + agentKeys.length
+
     agentKeys
       .forEach (key) =>
-        tr.append($('<th>').text(@data.agents[key].abbr))
+        tr.append($('<th>')
+          .text(@data.agents[key].abbr))
+          .addClass countCls
     @head.append(tr)
 
     @table.html('')
+
+    needNotes = []
 
     i = 0
     while true
@@ -73,27 +94,40 @@ class AtomCaniuseView extends SelectListView
       agentKeys
         .forEach (key) =>
           agent = @data.agents[key]
-          v = agent.versions[agent.versions.length - i]
+          version = agent.versions[agent.versions.length - i] or ''
 
-          td = $('<td>').text(v or '')
-          support = String(item.stats[key][v]).replace /\s.*/g, ''
+          support = String(item.stats[key][version])
+
+          td = $('<td>').text(version)
+
+          hasNote = support.match(/\s#(\d+)$/)
+          if hasNote
+            td.append $('<span>').text(repeat '*', hasNote[1])
+            support = support.replace /\s#(\d+)$/g, ''
+            needNotes.push hasNote[1]
+
+          # hasInfo = support.match(/\s([a-z]$)$/)
+          # if hasInfo
+          #   support = support.replace /\s[a-z]$/g, ''
+          #   info = infos[hasInfo[1]]
+          #   console.log hasInfo[1], info
+
+          support = support.replace /\s.*/g, ''
 
           # y - (Y)es, supported by default
           if support is 'y'
             td.addClass('is-supported')
 
           # a - (A)lmost supported (aka Partial support)
-
           else if support is 'a'
             td.addClass('is-almost-supported')
-
 
           # u - Support (u)nknown
           # x - Requires prefi(x) to work
           # p - No support, but has (P)olyfill
           # n - (N)o support, or disabled by default
           # d - (D)isabled by default (need to enable flag or something)
-          else if v
+          else if version
             td.addClass('is-unsupported')
 
           tr.append(td)
@@ -101,6 +135,14 @@ class AtomCaniuseView extends SelectListView
       @table.prepend(tr)
 
       break unless i++ < 10
+
+    notes = Object.keys(item.notes_by_num)
+      .filter (i) => needNotes.indexOf(i) isnt -1
+      .map (i) => $('<div>').text(repeat('*', i) + ' ' + item.notes_by_num[i])
+
+    @notes
+      .html('')
+      .append(notes)
 
   # cancel: -> console.log 'mööp'
 

@@ -20,6 +20,7 @@
     table {
         margin-top: 10px;
         width: 100%;
+
         th {
             color: @text-color-highlight;
             text-align: center;
@@ -31,6 +32,7 @@
             text-align: center;
             padding: 2px 0;
             line-height: 1;
+            position: relative;
 
             &.is-supported {
                 background-color: @background-color-success;
@@ -41,6 +43,26 @@
             &.is-unsupported {
                 background-color: @background-color-error;
             }
+
+            span {
+                position: absolute;
+                right: 5px;
+            }
         }
     }
+
+    @iterations: 1;
+    .mixin-loop (@i) when (@i <= 14) {
+      table tr.agents-count-@{i} th {
+          width: calc(100%/@i);
+      }
+      .mixin-loop(@i + 1);
+    }
+    .mixin-loop(@iterations);
+
+
+    .notes:not(:empty) {
+        padding-top: 10px;
+    }
+
 }
