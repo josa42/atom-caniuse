@@ -1,7 +1,31 @@
+request = require 'request'
 CaniuseView = require './caniuse-view'
+
+UPDATE_URL = 'https://raw.githubusercontent.com/Fyrd/caniuse/master/data.json'
+
+isJsonString = (str) ->
+    try
+      JSON.parse str
+      return yes
+    return no
+
 
 module.exports =
   caniuseView: null
+
+  activate: (state) ->
+    atom.workspaceView.command 'can-i-use:show', =>
+      @caniuseView ?= new CaniuseView()
+      @caniuseView.show()
+
+    atom.workspaceView.command 'can-i-use:update', =>
+      request UPDATE_URL, (error, response, body) =>
+        if not error and response.statusCode is 200 and isJsonString(body)
+          localStorage['caniuse:data'] = body
+          @caniuseView.populate() if @caniuseView
+        else
+          @caniuseView.setError 'Loading data failed!'
+
   config:
     showIe:
       title: 'Show IE'
@@ -55,8 +79,3 @@ module.exports =
       title: 'Show UC Browser for Android'
       type: 'boolean'
       default: false
-
-  activate: (state) ->
-    atom.workspaceView.command 'can-i-use:show', =>
-      @caniuseView = new CaniuseView()
-      @caniuseView.show()

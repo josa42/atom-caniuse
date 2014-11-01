@@ -9,6 +9,7 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
-    "open": "0.0.5"
+    "open": "0.0.5",
+    "request": "^2.47.0"
   }
 }

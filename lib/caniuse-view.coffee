@@ -1,12 +1,11 @@
 {SelectListView, TextEditorView, $} = require 'atom'
 {exec} = require('child_process')
-data = require '../data/data.json'
 open = require 'open'
 
 module.exports =
 class AtomCaniuseView extends SelectListView
   @content: ->
-    @div class: 'select-list', =>
+    @div class: 'select-list no-data', =>
       @subview 'filterEditorView', new TextEditorView(mini: true)
       @div class: 'error-message', outlet: 'error'
       @div class: 'loading', outlet: 'loadingArea', =>
@@ -17,24 +16,40 @@ class AtomCaniuseView extends SelectListView
         @thead outlet: 'head'
         @tbody outlet: 'table'
 
+  data: null
+
   getFilterKey: -> 'title'
 
   initialize: (serializeState) ->
-    super
     @addClass('overlay from-top caniuse-view')
+    super
+
+  loadData: ->
+    @setLoading('Loading data...')
+    @data = null
+
+    try
+      @data = JSON.parse localStorage['caniuse:data']
+
+    if not @data or not @data.data
+      atom.workspaceView.trigger 'can-i-use:update'
+      @addClass 'no-data'
+      return no
+
+    @removeClass 'no-data'
+    return yes
 
   viewForItem: (item) ->
     "<li>#{item.title}</li>"
 
   confirmed: (item) ->
     open("http://caniuse.com/#feat=#{item.key}");
-
     @cancel()
 
   selectItemView: (view) ->
     super(view)
 
-    agentKeys = Object.keys(data.agents)
+    agentKeys = Object.keys(@data.agents)
       .filter (key) ->
         confKey = 'show' + key.replace(/(^|_)([a-z])/g, (m) ->
           m.replace(/^_/, '').toUpperCase()
@@ -46,8 +61,8 @@ class AtomCaniuseView extends SelectListView
     @head.html('')
     tr = $('<tr>')
     agentKeys
-      .forEach (key) ->
-        tr.append($('<th>').text(data.agents[key].abbr))
+      .forEach (key) =>
+        tr.append($('<th>').text(@data.agents[key].abbr))
     @head.append(tr)
 
     @table.html('')
@@ -56,8 +71,8 @@ class AtomCaniuseView extends SelectListView
     while true
       tr = $('<tr>')
       agentKeys
-        .forEach (key) ->
-          agent = data.agents[key]
+        .forEach (key) =>
+          agent = @data.agents[key]
           v = agent.versions[agent.versions.length - i]
 
           td = $('<td>').text(v or '')
@@ -90,14 +105,14 @@ class AtomCaniuseView extends SelectListView
   # cancel: -> console.log 'mööp'
 
   populate: ->
+    if @loadData()
+      rows = Object.keys(@data.data)
+        .map (key) =>
+          row = @data.data[key]
+          row.key = key
+          return row
 
-    rows = Object.keys(data.data)
-      .map (key) ->
-        row = data.data[key]
-        row.key = key
-        return row
-
-    @setItems rows
+      @setItems rows
 
   show: ->
     @populate()

@@ -3,6 +3,12 @@
   'label': 'Packages'
   'submenu': [
     'label': 'Can I Use'
-    'command': 'can-i-use:show'
+    'submenu': [{
+      'label': 'Show'
+      'command': 'can-i-use:show'
+    },{
+      'label': 'Update'
+      'command': 'can-i-use:update'
+    }]
   ]
 }]
