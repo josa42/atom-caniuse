@@ -1,3 +1,7 @@
+## 0.4.0
+* Updated colors to match themes
+
+
 ## 0.3.0 - Data updating
 * Add update command `can-i-use:update`
 * Renamed show command `can-i-use:show`
