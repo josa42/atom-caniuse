@@ -163,6 +163,13 @@ class AtomCaniuseView extends SelectListView
 
   # cancel: -> console.log 'mööp'
 
+  populateList: ->
+    super()
+    if @list.is(':empty')
+      @head.empty()
+      @table.empty()
+      @notes.empty()
+
   populate: ->
     if @loadData()
       rows = Object.keys(@data.data)
