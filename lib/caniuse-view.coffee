@@ -148,9 +148,14 @@ class AtomCaniuseView extends SelectListView
 
       break unless i++ < 10
 
-    notes = Object.keys(item.notes_by_num)
+    notes = []
+    notes.push(markdown.toHTML(item.notes)) if item.notes
+
+    notesByNumber = Object.keys(item.notes_by_num)
       .filter (i) => needNotes.indexOf(i) isnt -1
-      .map (i) => markdown.toHTML(repeat('\\*', i) + ' ' + item.notes_by_num[i])
+      .map (i) => markdown.toHTML("#{i} #{item.notes_by_num[i]}")
+
+    notes = notes.concat(notesByNumber)
 
     @notes
       .html('')
