@@ -47,9 +47,38 @@
                 background-color: @background-color-error;
             }
 
+            &.requires-prefix:after {
+                content: '-';
+                display: block;
+                position: absolute;
+
+                font-size: 0.66em;
+                width: 10px;
+                height: 10px;
+
+                background-color: white;
+
+                right: 0;
+                top: 0;
+
+                color: black;
+                line-height: 10px;
+                font-weight: bold;
+
+                &.is-supported {
+                    color: @background-color-success;
+                }
+                &.is-almost-supported {
+                    color: lighten(@background-color-success, 20%);
+                }
+            }
+
             span {
                 position: absolute;
-                right: 5px;
+                left: 4px;
+                font-size: 0.66em;
+                line-height: 10px;
+                top: 0;
             }
         }
     }

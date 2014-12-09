@@ -101,9 +101,10 @@ class AtomCaniuseView extends SelectListView
 
           td = $('<td>').text(version)
 
+          # console.log(support, item.notes_by_num)
           hasNote = support.match(/\s#(\d+)$/)
           if hasNote
-            td.append $('<span>').text(repeat '*', hasNote[1])
+            td.append $('<span>').text(hasNote[1])
             support = support.replace /\s#(\d+)$/g, ''
             needNotes.push hasNote[1]
 
@@ -113,23 +114,33 @@ class AtomCaniuseView extends SelectListView
           #   info = infos[hasInfo[1]]
           #   console.log hasInfo[1], info
 
-          support = support.replace /\s.*/g, ''
+          # support = support.replace /\s.*/g, ''
 
-          # y - (Y)es, supported by default
-          if support is 'y'
-            td.addClass('is-supported')
+          supportKeys = support.split(/\s/g)
 
-          # a - (A)lmost supported (aka Partial support)
-          else if support is 'a'
-            td.addClass('is-almost-supported')
-
-          # u - Support (u)nknown
-          # x - Requires prefi(x) to work
-          # p - No support, but has (P)olyfill
-          # n - (N)o support, or disabled by default
-          # d - (D)isabled by default (need to enable flag or something)
-          else if version
+          if version
             td.addClass('is-unsupported')
+
+          supportKeys
+            .forEach (supportKey) =>
+              # y - (Y)es, supported by default
+              if supportKey is 'y'
+                td.removeClass('is-unsupported')
+                td.addClass('is-supported')
+
+              # a - (A)lmost supported (aka Partial support)
+              else if supportKey is 'a'
+                td.removeClass('is-unsupported')
+                td.addClass('is-almost-supported')
+
+              else if supportKey is 'x'
+                td.addClass('requires-prefix')
+
+              # u - Support (u)nknown
+              # x - Requires prefi(x) to work
+              # p - No support, but has (P)olyfill
+              # n - (N)o support, or disabled by default
+              # d - (D)isabled by default (need to enable flag or something)
 
           tr.append(td)
 
