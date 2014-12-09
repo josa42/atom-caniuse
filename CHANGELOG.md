@@ -1,3 +1,9 @@
+## 0.5.0
+* Show if vendor prefix is required
+* Show notes whitout numbers
+* Small style changes
+* Close table when no match is found
+
 ## 0.4.1
 * Add markdown parser for footnotes
 
