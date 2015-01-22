@@ -161,10 +161,6 @@ class AtomCaniuseView extends SelectListView
       .html('')
       .append(notes)
 
-  cancel: ->
-    console.log 'mööp'
-    $(@element).remove();
-
   populateList: ->
     super()
     if @list.is(':empty')
@@ -187,3 +183,6 @@ class AtomCaniuseView extends SelectListView
     workspaceElement = atom.views.getView(atom.workspace)
     $(workspaceElement).append(@element)
     @focusFilterEditor()
+
+  cancel: ->
+    $(@element).remove();
