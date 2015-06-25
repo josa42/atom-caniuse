@@ -4,10 +4,10 @@ CaniuseView = require './caniuse-view'
 UPDATE_URL = 'https://raw.githubusercontent.com/Fyrd/caniuse/master/data.json'
 
 isJsonString = (str) ->
-    try
-      JSON.parse str
-      return yes
-    return no
+  try
+    JSON.parse str
+    return yes
+  return no
 
 
 module.exports =
@@ -19,6 +19,7 @@ module.exports =
         @caniuseView ?= new CaniuseView()
         @caniuseView.show()
 
+    atom.commands.add 'atom-workspace',
       'can-i-use:update', =>
         request UPDATE_URL, (error, response, body) =>
           if not error and response.statusCode is 200 and isJsonString(body)
