@@ -1,3 +1,6 @@
+## 0.5.2
+* Fix update command
+
 ## 0.5.1
 * Adjust list height
 

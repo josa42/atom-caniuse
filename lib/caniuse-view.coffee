@@ -58,7 +58,7 @@ class AtomCaniuseView extends SelectListView
     "<li>#{item.title}</li>"
 
   confirmed: (item) ->
-    open("http://caniuse.com/#feat=#{item.key}");
+    open "http://caniuse.com/#feat=#{item.key}"
     @cancel()
 
   selectItemView: (view) ->
@@ -122,7 +122,7 @@ class AtomCaniuseView extends SelectListView
             td.addClass('is-unsupported')
 
           supportKeys
-            .forEach (supportKey) =>
+            .forEach (supportKey) ->
               # y - (Y)es, supported by default
               if supportKey is 'y'
                 td.removeClass('is-unsupported')
@@ -152,8 +152,8 @@ class AtomCaniuseView extends SelectListView
     notes.push(markdown.toHTML(item.notes)) if item.notes
 
     notesByNumber = Object.keys(item.notes_by_num)
-      .filter (i) => needNotes.indexOf(i) isnt -1
-      .map (i) => markdown.toHTML("#{i} #{item.notes_by_num[i]}")
+      .filter (i) -> needNotes.indexOf(i) isnt -1
+      .map (i) -> markdown.toHTML("#{i} #{item.notes_by_num[i]}")
 
     notes = notes.concat(notesByNumber)
 
@@ -185,4 +185,4 @@ class AtomCaniuseView extends SelectListView
     @focusFilterEditor()
 
   cancel: ->
-    $(@element).remove();
+    $(@element).remove()
