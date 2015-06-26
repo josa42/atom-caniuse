@@ -35,7 +35,8 @@ class AtomCaniuseView extends SelectListView
   getFilterKey: -> 'title'
 
   initialize: (serializeState) ->
-    @addClass('overlay from-top caniuse-view')
+    @panel = atom.workspace.addModalPanel(item: this, visible: false)
+    @addClass('caniuse-view')
     super
 
   loadData: ->
@@ -180,9 +181,8 @@ class AtomCaniuseView extends SelectListView
 
   show: ->
     @populate()
-    workspaceElement = atom.views.getView(atom.workspace)
-    $(workspaceElement).append(@element)
+    @panel.show()
     @focusFilterEditor()
 
   cancel: ->
-    $(@element).remove()
+    @panel.hide()
