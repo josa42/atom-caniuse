@@ -25,7 +25,7 @@
         border-collapse: separate;
 
         th {
-            color: @text-color-highlight;
+            color: @text-color;
             text-align: center;
             padding: 10px 0;
             line-height: 1;
@@ -38,12 +38,15 @@
             position: relative;
 
             &.is-supported {
+                // color: @text-color-success;
                 background-color: @background-color-success;
             }
             &.is-almost-supported {
-                background-color: lighten(@background-color-success, 20%);
+                // color: @text-color-success;
+                background-color: lighten(@background-color-success, 10%);
             }
             &.is-unsupported {
+              // color: @text-color-error;
                 background-color: @background-color-error;
             }
 
@@ -94,11 +97,33 @@
 
 
     .notes:not(:empty) {
-        padding-top: 10px;
+      padding-top: 10px;
 
-        p {
-            margin: 0;
+      p {
+          margin: 0 0 0.4em 0;
+          line-height: 1.4;
+      }
+
+      p.number {
+        float: left;
+        width: 1.6em;
+
+        span {
+          display: block;
+
+          width: 1em;
+          height: 1em;
+
+          font-size: 0.8em;
+          line-height: 1em;
+
+          background: @text-color;
+          color: @overlay-background-color;
+
+          text-align: center;
+          vertical-align: top;
         }
+      }
     }
 
 }
