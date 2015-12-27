@@ -97,41 +97,25 @@ class AtomCaniuseView extends SelectListView
         .forEach (key) =>
           agent = @data.agents[key]
           version = agent.versions[agent.versions.length - i] or ''
-
           support = String(item.stats[key][version])
-
           td = $('<td>').text(version)
 
-          # console.log(support, item.notes_by_num)
           hasNote = support.match(/\s#(\d+)$/)
           if hasNote
             td.append $('<span>').text(hasNote[1])
             support = support.replace /\s#(\d+)$/g, ''
             needNotes.push hasNote[1]
 
-          # hasInfo = support.match(/\s([a-z]$)$/)
-          # if hasInfo
-          #   support = support.replace /\s[a-z]$/g, ''
-          #   info = infos[hasInfo[1]]
-          #   console.log hasInfo[1], info
-
-          # support = support.replace /\s.*/g, ''
-
           supportKeys = support.split(/\s/g)
-
-          if version
-            td.addClass('is-unsupported')
 
           supportKeys
             .forEach (supportKey) ->
               # y - (Y)es, supported by default
               if supportKey is 'y'
-                td.removeClass('is-unsupported')
                 td.addClass('is-supported')
 
               # a - (A)lmost supported (aka Partial support)
               else if supportKey is 'a'
-                td.removeClass('is-unsupported')
                 td.addClass('is-almost-supported')
 
               else if supportKey is 'x'
@@ -142,6 +126,9 @@ class AtomCaniuseView extends SelectListView
               # p - No support, but has (P)olyfill
               # n - (N)o support, or disabled by default
               # d - (D)isabled by default (need to enable flag or something)
+
+          if version and not td.attr('class')
+            td.addClass('is-unsupported')
 
           tr.append(td)
 
@@ -171,13 +158,9 @@ class AtomCaniuseView extends SelectListView
 
   populate: ->
     if @loadData()
-      rows = Object.keys(@data.data)
-        .map (key) =>
-          row = @data.data[key]
-          row.key = key
-          return row
-
-      @setItems rows
+      @setItems(Object.keys(@data.data)
+        .map (key) => $.extend({ key }, @data.data[key])
+        .sort (a, b) -> a.title.localeCompare(b.title))
 
   show: ->
     @populate()
