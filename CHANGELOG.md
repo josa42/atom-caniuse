@@ -1,3 +1,15 @@
+## 0.6
+- Automatically update data every x days
+
+## 0.5.5
+- Bugfixes
+
+## 0.5.4
+- Bugfixes
+
+## 0.5.3
+- Bugfixes
+
 ## 0.5.2
 * Fix update command
 

@@ -1,7 +1,5 @@
-request = require 'request'
 CaniuseView = require './caniuse-view'
-
-UPDATE_URL = 'https://raw.githubusercontent.com/Fyrd/caniuse/master/data.json'
+loadData = require './utils/load-data'
 
 isJsonString = (str) ->
   try
@@ -21,14 +19,21 @@ module.exports =
 
     atom.commands.add 'atom-workspace',
       'can-i-use:update', =>
-        request UPDATE_URL, (error, response, body) =>
-          if not error and response.statusCode is 200 and isJsonString(body)
-            localStorage['caniuse:data'] = body
-            @caniuseView.populate() if @caniuseView
-          else
-            @caniuseView.setError 'Loading data failed!'
+        loadData()
+          .then(() =>
+            if @caniuseView
+              @caniuseView.populate()
+          )
+          .catch(() =>
+            if @caniuseView
+              @caniuseView.setError 'Loading data failed!'
+          )
 
   config:
+    updateDataInterval:
+      description: 'Update data if older than (days)'
+      type: 'number'
+      default: 7
     showIe:
       title: 'Show IE'
       type: 'boolean'

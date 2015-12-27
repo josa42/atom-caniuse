@@ -2,6 +2,7 @@
 {exec} = require('child_process')
 {markdown} = require('markdown')
 open = require 'open'
+loadData = require './utils/load-data'
 
 # infos =
 #   y: 'Yes, supported by default'
@@ -38,22 +39,6 @@ class AtomCaniuseView extends SelectListView
     @panel = atom.workspace.addModalPanel(item: this, visible: false)
     @addClass('caniuse-view')
     super
-
-  loadData: ->
-    @setLoading('Loading data...')
-    @data = null
-
-    try
-      @data = JSON.parse localStorage['caniuse:data']
-
-    if not @data or not @data.data
-      workspaceElement = atom.views.getView(atom.workspace)
-      atom.commands.dispatch(workspaceElement, 'can-i-use:update')
-      @addClass 'no-data'
-      return no
-
-    @removeClass 'no-data'
-    return yes
 
   viewForItem: (item) ->
     "<li>#{item.title}</li>"
@@ -157,10 +142,19 @@ class AtomCaniuseView extends SelectListView
       @notes.empty()
 
   populate: ->
-    if @loadData()
-      @setItems(Object.keys(@data.data)
-        .map (key) => $.extend({ key }, @data.data[key])
-        .sort (a, b) -> a.title.localeCompare(b.title))
+
+    @setLoading('Loading data...')
+    @data = null
+
+    loadData()
+      .then((data) =>
+        @data = data
+        @removeClass 'no-data'
+        @setItems(Object.keys(@data.data)
+          .map (key) => $.extend({ key }, @data.data[key])
+          .sort (a, b) -> a.title.localeCompare(b.title))
+      )
+      .catch((error) => @addClass 'no-data')
 
   show: ->
     @populate()
