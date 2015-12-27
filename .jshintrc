@@ -1,0 +1,14 @@
+{
+  "asi": true,
+  "curly": true,
+  "devel": false,
+  "eqeqeq": true,
+  "esnext": true,
+  "noarg": true,
+  "nonbsp": true,
+  "strict": false,
+  "undef": true,
+  "unused": true,
+  "node": true,
+  "predef": [ "atom" ]
+}
