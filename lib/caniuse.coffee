@@ -1,12 +1,5 @@
-CaniuseView = require './caniuse-view'
-loadData = require './utils/load-data'
-
-isJsonString = (str) ->
-  try
-    JSON.parse str
-    return yes
-  return no
-
+CaniuseView = null
+loadData = null
 
 module.exports =
   caniuseView: null
@@ -14,11 +7,13 @@ module.exports =
   activate: (state) ->
     atom.commands.add 'atom-workspace',
       'can-i-use:show': =>
+        CaniuseView ?= require './caniuse-view'
         @caniuseView ?= new CaniuseView()
         @caniuseView.show()
 
     atom.commands.add 'atom-workspace',
       'can-i-use:update', =>
+        loadData ?= require './utils/load-data'
         loadData()
           .then(() =>
             if @caniuseView
