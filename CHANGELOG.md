@@ -1,7 +1,8 @@
-## 0.6
+## 0.6.0
 - Automatically update data every x days
 - Converted to JS
 - Optimize startup time
+- Small styling optimizations
 
 ## 0.5.5
 - Bugfixes
