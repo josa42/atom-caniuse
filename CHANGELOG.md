@@ -1,3 +1,6 @@
+## 0.6.1
+- Remove debug code
+
 ## 0.6.0
 - Automatically update data every x days
 - Converted to JS
