@@ -1,5 +1,6 @@
 ## 0.6
 - Automatically update data every x days
+- Converted to JS
 - Optimize startup time
 
 ## 0.5.5
