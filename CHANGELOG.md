@@ -1,3 +1,6 @@
+## 0.7.0
+- Add feedback notification to update command
+
 ## 0.6.1
 - Remove debug code
 
