@@ -10,5 +10,5 @@
   "undef": true,
   "unused": true,
   "node": true,
-  "predef": [ "atom" ]
+  "predef": [ "atom", "localStorage" ]
 }
