@@ -1,3 +1,8 @@
+# Changelog
+
+## 0.7.1
+- Optimize footnote
+
 ## 0.7.0
 - Add feedback notification to update command
 
