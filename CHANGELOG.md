@@ -1,7 +1,11 @@
 # Changelog
 
-## 0.7.1
+## 0.8.0
+- Add config option to use accessible colors (leny)
 - Optimize footnote
+
+## 0.7.1
+- Bugfixes
 
 ## 0.7.0
 - Add feedback notification to update command
