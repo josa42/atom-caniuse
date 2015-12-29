@@ -70,6 +70,10 @@
     "type": "boolean",
     "default": false
   },
+  "showEdge": {
+    "type": "boolean",
+    "default": true
+  },
   "useAccessibleColors": {
     "type": "boolean",
     "default": false
