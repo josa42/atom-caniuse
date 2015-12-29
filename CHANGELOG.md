@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.9.0
+- Change font color in table
+
 ## 0.8.0
 - Add config option to use accessible colors (leny)
 - Optimize footnote
