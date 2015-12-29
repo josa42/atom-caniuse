@@ -2,6 +2,7 @@
 
 ## 0.9.0
 - Change font color in table
+- Add config option for number of shown versions 
 
 ## 0.8.0
 - Add config option to use accessible colors (leny)

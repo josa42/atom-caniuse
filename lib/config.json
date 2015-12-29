@@ -73,5 +73,11 @@
   "useAccessibleColors": {
     "type": "boolean",
     "default": false
+  },
+  "numberOfVersions": {
+    "title": "Number Of Versions Shown",
+    "type": "integer",
+    "default": 10,
+    "minimum": 5
   }
 }
