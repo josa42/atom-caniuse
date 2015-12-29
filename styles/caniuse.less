@@ -126,4 +126,20 @@
       }
     }
 
+    &.accessible-colors {
+        table td {
+            &.is-supported {
+                color: black;
+                background-color: #a6edb2;
+            }
+            &.is-almost-supported {
+                color: black;
+                background-color: #97bff0;
+            }
+            &.is-unsupported {
+                color: white;
+                background-color: #842e98;
+            }
+        }
+    }
 }

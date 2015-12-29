@@ -69,5 +69,10 @@
     "title": "Show UC Browser for Android",
     "type": "boolean",
     "default": false
+  },
+  "useAccessibleColors": {
+    "title": "Use accessible colors",
+    "type": "boolean",
+    "default": false
   }
 }
