@@ -71,7 +71,6 @@
     "default": false
   },
   "useAccessibleColors": {
-    "title": "Use accessible colors",
     "type": "boolean",
     "default": false
   }
