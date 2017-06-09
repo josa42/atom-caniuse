@@ -3,7 +3,7 @@
 [![Travis](https://img.shields.io/travis/josa42/atom-caniuse/master.svg)](https://github.com/josa42/atom-caniuse)
 [![apm](https://img.shields.io/apm/v/caniuse.svg)](https://atom.io/packages/caniuse)
 [![apm](https://img.shields.io/apm/dm/caniuse.svg)](https://atom.io/packages/caniuse)
-[![apm](https://img.shields.io/apm/l/vim-mode.svg)]()
+[![apm](https://img.shields.io/apm/l/caniuse.svg)](https://github.com/josa42/atom-caniuse/blob/master/LICENSE.md)
 
 Quick access to the [Can I Use](caniuse.com) support tables.
 
