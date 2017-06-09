@@ -5,6 +5,7 @@
   "description": "Quick access to the caniuse.com support tables.",
   "repository": "https://github.com/josa42/atom-caniuse",
   "license": "MIT",
+  "author": "Josa Gesell<josa@gesell.me>",
   "engines": {
     "atom": ">0.50.0"
   },
@@ -13,5 +14,17 @@
     "open": "0.0.5",
     "request": "^2.47.0",
     "atom-space-pen-views": "^2.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "eslint ."
   }
 }
